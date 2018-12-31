@@ -11,6 +11,10 @@ node{
 		sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@54.173.144.248:/opt/tomcat9/webapps/'
 	}
 	}
+	stage('Build Docker Image'){
+        sh 'docker build -t care2manoj/devopsprojects:2.0.0 .'
+        
+    }
 	stage('Push Docker Image'){
         withCredentials([string(credentialsId: 'DockerHubPass', variable: 'DockerHubPass')]){
             sh "docker login -u care2manoj -p ${DockerHubPass}"
