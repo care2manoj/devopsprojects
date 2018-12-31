@@ -7,7 +7,7 @@ node{
 		sh "${mvnHome}/bin/mvn package"
 	}
 	stage('Deploy to Tomcat'){
-		sshagent(['pkk-tomcat']) {
+		sshagent(['ppk-tomcat']) {
 		sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@54.173.144.248:/opt/tomcat9/webapps/'
 	}
 	}
