@@ -21,5 +21,11 @@ node{
     	}
         sh 'docker push care2manoj/devopsprojects:2.0.0'
     	}
+	stage('Run Container on Prod Server'){
+        def dockerRun = 'sudo docker run -p 8000:8080 -d care2manoj/devopsprojects:2.0.0'
+        sshagent(['ppk-tomcat']) {
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@54.173.144.248 ${dockerRun}"
+        }
+    	}
 	
 }
