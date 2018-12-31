@@ -14,12 +14,12 @@ node{
 	stage('Build Docker Image'){
         sh 'docker build -t care2manoj/devopsprojects:2.0.0 .'
         
-    }
+    	}
 	stage('Push Docker Image'){
         withCredentials([string(credentialsId: 'DockerHubPass', variable: 'DockerHubPass')]){
             sh "docker login -u care2manoj -p ${DockerHubPass}"
-    }
+    	}
         sh 'docker push care2manoj/devopsprojects:2.0.0'
-    }
+    	}
 	
 }
