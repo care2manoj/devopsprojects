@@ -8,7 +8,7 @@ node{
 	}
 	stage('Deploy to Tomcat'){
 		sshagent(['ppk-tomcat']) {
-		sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@52.55.166.20:/opt/tomcat9/webapps/'
+		sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@3.84.72.28:/opt/tomcat9/webapps/'
 	}
 	}
 	stage('Build Docker Image'){
@@ -24,7 +24,7 @@ node{
 	stage('Run Container on Prod Server'){
         def dockerRun = 'sudo docker run -p 5000:8080 -d care2manoj/devopsprojects:2.0.0'
         sshagent(['ppk-tomcat']) {
-            sh "ssh -o StrictHostKeyChecking=no ubuntu@52.55.166.20 ${dockerRun}"
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@3.84.72.28 ${dockerRun}"
         }
     	}
 	
